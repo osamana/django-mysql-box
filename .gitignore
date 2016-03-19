@@ -1,0 +1,10 @@
+*.pyc
+*.log
+*.pid
+Vagrantfile
+*.DS_Store
+.idea
+.vagrant
+mydjango/static/*
+mydjango/components/*
+mydjango/uploaded/*
