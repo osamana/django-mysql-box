@@ -25,7 +25,7 @@ echo "Setting up Django"
 echo "---------------------------------------------"
 pip install -r requirements.txt
 nodeenv -p --prebuilt
-workon opendims
+workon mydjango
 npm install -g bower
 
 echo "---------------------------------------------"

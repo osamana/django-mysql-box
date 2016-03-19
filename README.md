@@ -41,14 +41,13 @@
     cd mydjango
     vi mydjango/settings.py
 
-\# Run the first database migration
+\# Run the first database migration to create Django tables
 
-    ./manage.py makemigrations
     ./manage.py migrate
 
 \# Create the superuser account (admin admin123)
 
-    python manage.py createsuperuser
+    ./manage.py createsuperuser
 
 \# Test by running the development server
 
