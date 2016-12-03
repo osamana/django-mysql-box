@@ -1,0 +1,54 @@
+#  installing mysql for ubuntu 14.04
+sudo apt-get update
+
+# sudo apt-get install mysql-server
+# silent install
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password secret'
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password secret'
+sudo apt-get -y install mysql-server
+
+
+mysql -u root -psecret << EOF
+CREATE USER 'django_login' IDENTIFIED BY 'secret';
+CREATE DATABASE django_db CHARSET UTF8;
+GRANT ALL PRIVILEGES ON django_db.* TO "django_login"@"localhost" IDENTIFIED BY "secret";
+EOF
+
+# switch to the virtual environment
+
+sudo apt-get build-dep python-mysqldb
+sudo pip install MySQL-python
+sudo apt-get install python-mysqldb
+
+# this one worked
+pip install mysql-python
+
+
+# setting up the prompt
+mkdir ~/.bash
+cd ~/.bash
+git clone https://github.com/osamana/git-aware-prompt.git
+
+# add these to the ~/.bashrc
+cat <<EOF >> ~/.bashrc
+export GITAWAREPROMPT=~/.bash/git-aware-prompt
+source "${GITAWAREPROMPT}/main.sh"
+source "export PS1="\${debian_chroot:+(\$debian_chroot)}\u@\h:\w \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]\$ "
+EOF
+
+#  restart the .bashrc source
+. ~/.bashrc
+
+
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django_db',
+        'USER': 'django_login',
+        'PASSWORD': 'secret',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
