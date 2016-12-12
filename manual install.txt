@@ -15,7 +15,7 @@ GRANT ALL PRIVILEGES ON django_db.* TO "django_login"@"localhost" IDENTIFIED BY 
 EOF
 
 # switch to the virtual environment
-
+apt-get install libxml2-dev libxslt1-dev python-dev
 sudo apt-get build-dep python-mysqldb
 sudo pip install MySQL-python
 sudo apt-get install python-mysqldb
